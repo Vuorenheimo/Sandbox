@@ -7,7 +7,18 @@ const Header = (props) => <h1>{props.headline}</h1>
 const Button = (props) => <button onClick={props.onClick}>{props.text}</button>
 
 
-const StatisticsLine = (props) => <div>{props.text} {props.value}</div>
+const StatisticsLine = (props) => {
+  return (
+    <tr>
+      <td>
+        {props.text}
+      </td>
+      <td>
+        {props.value}
+      </td>
+    </tr>
+  )
+}
 
 
 const Statistics = (props) => {
@@ -21,15 +32,24 @@ const Statistics = (props) => {
   }
 
   return (
-    <div>
-      <Header headline={ props.headline } />
-      <StatisticsLine text={ "Good" } value={ props.good } />
-      <StatisticsLine text={ "Neutral" } value={ props.neural } />
-      <StatisticsLine text={ "Bad" } value={ props.bad } />
-      <StatisticsLine text={ "All" } value={ all } />
-      <StatisticsLine text={ "Average" } value={ average } />
-      <StatisticsLine text={ "Positive" } value={ positive } />
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <Header headline={ "Statistics" } />
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <StatisticsLine text={ "Good" } value={ props.good } />
+        <StatisticsLine text={ "Neutral" } value={ props.neutral } />
+        <StatisticsLine text={ "Bad" } value={ props.bad } />
+        <StatisticsLine text={ "All" } value={ all } />
+        <StatisticsLine text={ "Average" } value={ average } />
+        <StatisticsLine text={ "Positive" } value={ positive } />
+      </tbody>
+    </table>
   )
 }
 
@@ -47,7 +67,7 @@ const App = () => {
       <Button text={ "Good" } onClick={() => setGood(good + 1)} />
       <Button text={ "Neutral" } onClick={() => setNeutral(neutral + 1)} />
       <Button text={ "Bad" } onClick={() => setBad(bad + 1)} />
-      <Statistics headline={ "Statistics" } good={ good } neutral={ neutral } bad={ bad } />
+      <Statistics good={ good } neutral={ neutral } bad={ bad } />
     </div>
   )
 }
